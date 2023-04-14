@@ -1,12 +1,20 @@
 ﻿using System;
-
+/*
+ * Up & Down 게임 만들기
+ * 컴퓨터는 0~999 중에 랜덤한 숫자를 뽑는다.
+ * 유저는 10번의 기회가 있다.
+ * 플레이어가 수를 입력 하면 컴퓨터는 그 수가 큰지, 작은지, 정답인지 알려준다.
+ * 10번의 기회 소진시 게임을 종료할껀지 재시작 할껀지 선택 할수 있다.
+ */
 namespace UpAndDown
 {
     internal class Program
     {
 
+        // 입력한 수의 상태
         public enum STATE { small, big, collect, err}
 
+        //기본세팅
         public static void init(out int target, out int chance)
         {
             Random random = new Random();
@@ -14,6 +22,7 @@ namespace UpAndDown
 
             chance = 10;
         }
+        // target 과 입력된 num 을 비교하여 상태 세팅
         public static STATE CheckNum(int target,int num)
         {
             if (target == num)
@@ -43,7 +52,7 @@ namespace UpAndDown
             {
                 Console.WriteLine("컴퓨터의 숫자를 맞춰보세요:");
 
-
+                //입력 예외처리
                 if (int.TryParse(Console.ReadLine(), out guess))
                 {
                     Console.WriteLine("입력한 수는 {0}입니다.", guess);
@@ -55,6 +64,7 @@ namespace UpAndDown
                     continue;
                 }
 
+                //입력 예외처리 수의 범위내에 입력만 받는다.
                 if (guess > 999 || 0 > guess)
                 {
                     Console.WriteLine("수의 범위를 벗어났습니다.\n 다시 수를 입력해주세요(0~999)");
@@ -64,6 +74,7 @@ namespace UpAndDown
 
                 STATE result = CheckNum(target, guess);
 
+                //입력된 수를 체크하고 비교해서 결과를 만든다.
                 switch (result)
                 {
                     case STATE.small:
@@ -84,6 +95,7 @@ namespace UpAndDown
                         break;
                 }
 
+                //게임 기회 모두 소비시
                 if (chance == 0)
                 {
                     Console.WriteLine("기회를 모두 소진하여 게임이 끝났습니다.");

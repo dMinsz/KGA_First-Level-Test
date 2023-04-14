@@ -69,13 +69,14 @@
             //string target = Console.ReadLine();
 
             //테스트코드
-            
-            Console.WriteLine(Solution1("pineapple apple","apple"));
+
+            //Console.WriteLine(Solution1("pineapple apple","apple"));
+            Console.WriteLine(Solution2("한단어 두단어 세단어"));
 
             //소수구하기
             //Console.WriteLine(IsPrime(11));
 
-            //Console.WriteLine(Solution2(str));
+
             //Console.WriteLine(SumOfDigits(123));
 
             //FindCommonItems 테스트

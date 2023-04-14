@@ -51,6 +51,7 @@
             return result;
         }
 
+        //k개의 정렬된 배열에서 공통항목을 찾는 코드
         static int[] FindCommonItems(int[] arr1, int[] arr2, int[] arr3)
         {
             List<int> list = new List<int>();
@@ -76,24 +77,24 @@
             //소수구하기
             //Console.WriteLine(IsPrime(11));
 
-            Console.WriteLine(SumOfDigits(123));
+            //Console.WriteLine(SumOfDigits(123));
 
             //FindCommonItems 테스트
-            //int[] arr1 = { 1, 5, 5, 10 };
-            //int[] arr2 = { 3, 4, 5, 5, 10 };
-            //int[] arr3 = { 5, 5, 10, 20 };
-            //var result = FindCommonItems(arr1, arr2, arr3);
+            int[] arr1 = { 1, 5, 5, 10 };
+            int[] arr2 = { 3, 4, 5, 5, 10 };
+            int[] arr3 = { 5, 5, 10, 20 };
+            var result = FindCommonItems(arr1, arr2, arr3);
 
 
-            //for (int i = 0; i < result.Length; i++)
-            //{
-            //    if (i == result.Length - 1)
-            //    {
-            //        Console.Write("{0}", result[i]);
-            //        break;
-            //    }
-            //    Console.Write("{0},", result[i]);
-            //}
+            for (int i = 0; i < result.Length; i++)
+            {
+                if (i == result.Length - 1)
+                {
+                    Console.Write("{0}", result[i]);
+                    break;
+                }
+                Console.Write("{0},", result[i]);
+            }
 
             //랜덤테스트
             //Random random = new Random();

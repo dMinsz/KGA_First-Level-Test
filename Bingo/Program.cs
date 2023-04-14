@@ -1,12 +1,19 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
+/*빙고게임 만들기
+ * 5x5 판을 생성하고 랜덤한 숫자를 배치한다.
+ * 원하는 숫자 입력시 해당 숫자는 특수기호로 바꾼다.
+ * 생성한 숫자외의 다른 수를 입력할 수 없다.(예외처리)
+ * 종료 조건은 빙고 3줄 이상시 종료한다.
+ */
 
 namespace Bingo
 {
     internal class Program
     {
 
+        //빙고판 만들기
         static void MakeMap(out int[,] map)
         {
             map = new int[5, 5];
@@ -39,6 +46,7 @@ namespace Bingo
             }
         }
 
+        //맵에 target 이 있는지 어디에있는지 체크한후 결과로 리턴
         static (int,int) CheckMap(int[,] map,int target) 
         {
   
@@ -55,6 +63,8 @@ namespace Bingo
 
             return (-1,-1); // 에러
         }
+
+        //빙고판 그리기
         static void Render(int[,] map , int score)
         {
             Console.WriteLine("======빙고========");
@@ -80,16 +90,15 @@ namespace Bingo
 
         }
 
-
+        //빙고가 몇개인지 체크하는 함수
         static void CheckBingo(int[,] map,ref int score) 
         {
             int result = 0;
 
-
-            int countRow = 0;
+            int countRow = 0; // 빙고 줄 체크
             int countColumn = 0;
 
-            int rowValue = 0;
+            int rowValue = 0; // 빙고 열 체크
             int ColumnValue = 0;
 
             for (int i = 0; i < map.GetLength(0); i++)
@@ -97,27 +106,27 @@ namespace Bingo
 
                 for (int j = 0; j < map.GetLength(1); j++)
                 {
-                    if (map[i,j] == -1)
+                    if (map[i,j] == -1) // 맞춘곳은 -1 로 바꿨으니 확인
                     {
                         rowValue++;
                     }
                     
                 }
 
-                if (rowValue == 5)
+                if (rowValue == 5) // 5개 즉 한줄 빙고시 카운트 상승
                 {
                     countRow++;
                 }
 
                 for (int j = 0; j < map.GetLength(1); j++)
                 {
-                    if (map[j, i] == -1)
+                    if (map[j, i] == -1)// 맞춘곳은 -1 로 바꿨으니 확인
                     {
                         ColumnValue++;
                     }
                 }
 
-                if (ColumnValue == 5)
+                if (ColumnValue == 5) // 5개 즉 한열 빙고시 카운트 상승
                 {
                     countColumn++;
                 }
@@ -146,30 +155,29 @@ namespace Bingo
             int x, y;
             MakeMap(out map);
 
-            while (true)
+            int target;
+
+            while (true) // 게임루프
             {
                 Console.Clear();
                 Render(map, score);
 
-                String input = Console.ReadLine();
-
-                if (input == null || input == "")
+                //입력 예외처리
+                if (!int.TryParse(Console.ReadLine(), out target))
                 {
+                    Console.WriteLine("잘못된 입력을 하였습니다..");
                     continue;
-                } // 혹시나 null 값이나 빈값일때 예외처리용
-
-
-                int target = int.Parse(input);
-
+                }
+              
                 (x,y) = CheckMap(map, target);
 
-                if ((x,y) == (-1,-1))
+                if ((x,y) == (-1,-1)) // 이미 체크한곳 또다시 체크시
                 {
-                    Console.Write("잘못입력했다..");
+                    Console.Write("이미 체크된곳을 입력했다..");
                     continue;
                 }
 
-                map[x,y] = -1;
+                map[x,y] = -1; // 체크된곳은 -1 로 표시해준다.
 
                 CheckBingo(map, ref score);
 

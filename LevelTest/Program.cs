@@ -68,12 +68,15 @@
             //string str = Console.ReadLine();
             //string target = Console.ReadLine();
 
+            //테스트코드
+            
+            Console.WriteLine(Solution1("pineapple apple","apple"));
+
             //소수구하기
             //Console.WriteLine(IsPrime(11));
-            
-            //테스트코드
+
             //Console.WriteLine(Solution2(str));
-            Console.WriteLine(SumOfDigits(123));
+            //Console.WriteLine(SumOfDigits(123));
 
             //FindCommonItems 테스트
             //int[] arr1 = { 1, 5, 5, 10 };
